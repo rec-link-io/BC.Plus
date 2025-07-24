@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BC.Plus — Earn commissions from wagers. Global affiliate. Powered by BC.Game." />
+  <title>BC.Plus | Powered by BC.Game</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --bc-bg1: #121420;
+      --bc-bg2: #0c0f1a;
+      --bc-cyan: #25EE88;
+      --bc-cyan-glow: #25EE88;
+      --bc-btn: #25EE88;
+      --bc-btn-hover: #19ae68;
+      --bc-card: rgba(0, 0, 0, 0.5);
+      --bc-card-border: #25EE88;
+      --bc-card-shadow: 0 0 10px #25EE88;
+      --bc-win: #25EE88;
+      --bc-title: #25EE88;
+      --bc-footer-bg: #1a1a1a;
+      --bc-footer-txt: #ddd;
+      --bc-box-bg: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, var(--bc-bg1), var(--bc-bg2));
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .container {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+    .scroll-text-container {
+      width: 60%;
+      max-width: 650px;
+      max-height: 80vh;
+      min-height: 280px;
+      overflow-y: auto;
+      font-size: 1.15rem;
+      padding: 1.5rem;
+      line-height: 1.7;
+      background: var(--bc-box-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px var(--bc-cyan-glow);
+      cursor: pointer;
+      margin-bottom: 2rem;
+      transition: box-shadow 0.3s;
+    }
+    .scroll-text-container:focus,
+    .scroll-text-container:hover {
+      box-shadow: 0 4px 8px var(--bc-cyan-glow), 0 0 0 2px var(--bc-cyan);
+      outline: none;
+    }
+    .scroll-text-container h1, .scroll-text-container h2 {
+      margin-bottom: 1rem;
+      color: var(--bc-title);
+    }
+    .scroll-text-container p, .scroll-text-container ul {
+      margin-bottom: 1.3rem;
+    }
+    .scroll-text-container ul li {
+      margin-left: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .start-now {
+      position: absolute;
+      bottom: 3rem;
+      left: 2rem;
+      padding: 1rem 2.5rem;
+      background: var(--bc-btn);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 8px var(--bc-cyan-glow);
+      z-index: 10;
+    }
+    .start-now:hover {
+      background: var(--bc-btn-hover);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 4px 8px var(--bc-cyan-glow);
+    }
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 0.75rem 1.5rem;
+      background: var(--bc-btn);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 4px var(--bc-cyan-glow);
+      z-index: 11;
+    }
+    .scroll-top-btn:hover {
+      background: var(--bc-btn-hover);
+      transform: translateY(-2px);
+    }
+    .carousel, .price-carousel {
+      display: flex;
+      overflow-x: auto !important;
+      overflow-y: hidden;
+      width: 100%;
+      padding: 2rem 0.5rem;
+      margin-bottom: 1.2rem;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    .price-carousel {
+      padding: 0.7rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .carousel-track, .price-carousel-track {
+      display: flex;
+      flex-wrap: nowrap;
+      min-width: fit-content;
+      gap: 1.5rem;
+    }
+    .price-carousel-track {
+      gap: 1.2rem;
+    }
+    .card {
+      background: var(--bc-card);
+      border: 1.5px solid var(--bc-card-border);
+      border-radius: 16px;
+      min-width: 240px;
+      max-width: 310px;
+      padding: 1.5rem;
+      color: #fff;
+      transition: transform 0.3s;
+      box-shadow: var(--bc-card-shadow);
+      flex: 0 0 auto;
+    }
+    .card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 8px var(--bc-cyan-glow);
+    }
+    .card h3 {
+      color: var(--bc-title);
+      font-size: 1.35rem;
+      margin-bottom: 0.7rem;
+    }
+    .card .game-icon {
+      font-size: 2rem;
+      margin-bottom: 0.6rem;
+      color: var(--bc-title);
+    }
+    .card .win-amount {
+      color: var(--bc-win);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .price-card {
+      background: var(--bc-box-bg);
+      border: 1.5px solid var(--bc-title);
+      border-radius: 12px;
+      padding: 1rem 3rem;
+      min-width: 160px;
+      max-width: 200px;
+      box-shadow: 0 0 8px var(--bc-cyan-glow);
+      color: #fff;
+      text-align: center;
+      transition: transform 0.3s;
+      flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .price-card:hover { transform: scale(1.08); }
+    .price-email {
+      font-size: 0.97rem;
+      color: #25EE88;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .play-now-text {
+      margin-top: 0.7rem;
+      text-align: center;
+      color: #25EE88;
+      font-weight: 600;
+      font-size: 1.08rem;
+      letter-spacing: .01em;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .play-now-text:hover {
+      color: #19ae68;
+      text-decoration: underline;
+    }
+    .price-card img {
+      display: block;
+      max-width: 100%;
+      max-height: 80px;
+      border-radius: 7px;
+      margin-bottom: 0;
+      margin-top: 0.2rem;
+      box-shadow: 0 2px 8px #25EE8811;
+      border: 1px solid #25EE88;
+      background: #111;
+    }
+    .footer {
+      background: var(--bc-footer-bg);
+      color: var(--bc-footer-txt);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-around;
+      box-shadow: 0 -4px 24px #000a;
+      border-radius: 15px 15px 0 0;
+    }
+    .footer-card {
+      background: #222b;
+      padding: 1.5rem;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 300px;
+      box-shadow: 0 4px 15px #00e0ff25;
+      transition: transform 0.3s;
+    }
+    .footer-card:hover {
+      transform: translateY(-5px);
+    }
+    .footer-card h3 {
+      color: var(--bc-title);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+    .footer-card p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+    }
+    .community-summary {
+      background: var(--bc-card);
+      border-radius: 10px;
+      padding: 1.2rem 1.5rem;
+      margin: 1rem 0;
+      max-width: 650px;
+      color: #fff;
+      border-left: 4px solid var(--bc-title);
+    }
+    .bcplus-image-fade-section {
+      width: 100%;
+      margin: 2rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 160px;
+      position: relative;
+    }
+    .bcplus-image-fade-section img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: auto;
+      max-width: 96vw;
+      max-height: 350px;
+      border-radius: 9px;
+      box-shadow: 0 6px 32px #25EE88bb, 0 0 0 2px #25EE88;
+      border: 1px solid #25EE88;
+      background: #111;
+      opacity: 0;
+      transition: opacity 1s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .bcplus-image-fade-section img.active {
+      opacity: 1;
+      z-index: 2;
+      pointer-events: auto;
+    }
+    .modal-bg {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 4000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .modal-bg.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-box {
+      background: var(--bc-card);
+      border: 2px solid var(--bc-card-border);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 4px 20px var(--bc-cyan-glow);
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: var(--bc-title);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .modal-close:hover {
+      color: #19ae68;
+    }
+    .modal-btns {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      justify-content: center;
+    }
+    .modal-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--bc-btn);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-btn:hover {
+      background: var(--bc-btn-hover);
+      transform: translateY(-2px);
+    }
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .modal-form label {
+      font-size: 1rem;
+      color: var(--bc-title);
+      font-weight: 600;
+    }
+    .modal-form input[type="text"],
+    .modal-form input[type="file"] {
+      padding: 0.8rem;
+      border: 1px solid var(--bc-card-border);
+      border-radius: 8px;
+      background: var(--bc-box-bg);
+      color: #fff;
+      font-size: 1rem;
+    }
+    .modal-form input[type="file"] {
+      padding: 0.5rem;
+    }
+    .modal-form .submit-btn {
+      padding: 0.8rem;
+      background: var(--bc-btn);
+      color: #000;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-form .submit-btn:hover {
+      background: var(--bc-btn-hover);
+      transform: translateY(-2px);
+    }
+    .modal-success {
+      margin-top: 1rem;
+      color: var(--bc-title);
+      font-weight: 600;
+      text-align: center;
+    }
+    @media (max-width: 700px) {
+      .scroll-text-container { font-size: 1rem; width: 90%; padding: 1rem; left: 1rem; }
+      .start-now { padding: 0.8rem 2rem; font-size: 1rem; left: 1rem; }
+      .carousel, .price-carousel { padding: 1rem 0.1rem; }
+      .card { min-width: 180px; max-width: 230px; padding: 1rem;}
+      .price-card { min-width: 110px; max-width: 140px; padding: 0.6rem 0.8rem; font-size: 0.9rem;}
+      .footer { flex-direction: column; align-items: center;}
+      .footer-card { max-width: 100%;}
+      .community-summary { padding: 1rem; font-size: 0.98rem;}
+      .bcplus-image-fade-section img { max-height: 180px !important; }
+      .modal-box { padding:2rem 1rem; width: 95%; }
+    }
+    .header-bar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.8rem 1rem 0.8rem 1rem;
+      background: rgba(0,0,0,0.18);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      min-height: 58px;
+      box-shadow: 0 2px 18px #25EE8822;
+    }
+    .header-logo {
+      height: 38px;
+      width: auto;
+      display: block;
+      background: none;
+      border-radius: 5px;
+      box-shadow: none;
+      max-width: 180px;
+    }
+    .header-play-btn {
+      background: var(--bc-btn);
+      color: #151c12;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.03rem;
+      padding: 0.2rem 0.7rem;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--bc-cyan-glow);
+      transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .header-play-btn:hover, .header-play-btn:focus {
+      background: var(--bc-btn-hover);
+      color: #111;
+      box-shadow: 0 2px 16px #25EE8899;
+    }
+    .flash-loader {
+      position: fixed;
+      z-index: 5000;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #121420;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: opacity 0.7s cubic-bezier(.55,.06,.68,.19);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .flash-loader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .flash-loader-imgbox {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      min-width: 160px;
+      min-height: 160px;
+    }
+    
+    @keyframes flash-logo-glow {
+      0% {
+        filter: brightness(0.8) blur(0px);
+        box-shadow: 0 0 10px #25ee8833, 0 0 0 2px #25ee88;
+      }
+      40% {
+        filter: brightness(1.2) blur(0.5px);
+        box-shadow: 0 0 24px #25ee88bb, 0 0 0 2px #25ee88;
+      }
+      60% {
+        filter: brightness(1.6) blur(2.5px);
+        box-shadow: 0 0 32px #25ee88f1, 0 0 0 4px #25ee88;
+      }
+      100% {
+        filter: brightness(2) blur(4px);
+        box-shadow: 0 0 56px #25ee88ff, 0 0 0 5px #25ee88;
+      }
+    }
+    .flash-loader-spinner {
+      width: 36px;
+      height: 36px;
+      border: 4.5px solid #fff2;
+      border-top: 4.5px solid #25EE88;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+      margin: 0 auto 1.3rem auto;
+      opacity: 0.8;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg);}
+    }
+    .flash-loader-text {
+      color: #fff;
+      letter-spacing: .06em;
+      font-weight: 600;
+      font-size: 1.29rem;
+      opacity: 0.92;
+      text-shadow: 0 2px 8px #25EE8880;
+    }
+    @media (max-width: 600px) {
+      .flash-loader-img { width: 85vw; height: 85vw; min-width: 80px; min-height: 80px; max-width: 90vw; max-height: 90vw;}
+      .flash-loader-imgbox { min-width: 90px; min-height: 90px;}
+      .flash-loader-text { font-size: 1.07rem;}
+      .flash-loader-spinner { width: 26px; height: 26px; border-width: 3px;}
+    }
+    .disclaimer-box {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.04);
+      border-top: 2px solid var(--bc-cyan);
+      border-bottom: 2px solid var(--bc-cyan);
+      color: #ccc;
+      padding: 1.5rem;
+      margin: 2rem auto;
+      font-size: 0.95rem;
+      text-align: left;
+      box-shadow: 0 0 18px #25EE8844;
+      border-radius: 12px;
+      max-width: 900px;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .disclaimer-logo {
+      width: 200px;
+      height: auto;
+    }
+    .disclaimer-text {
+      flex: 1;
+      min-width: 250px;
+    }
+    .disclaimer-text strong {
+      color: #25EE88;
+      font-weight: 600;
+    }
+    .disclaimer-text u {
+      text-decoration-color: #25EE88;
+    }
+    .info-section {
+      padding: 2rem 1.5rem;
+      margin: 1.5rem auto;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      box-shadow: 0 0 12px #25EE8844;
+      max-width: 1000px;
+      color: #ddd;
+    }
+    .info-section h2 {
+      color: #25EE88;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .info-section p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .info-section a {
+      color: #25EE88;
+      text-decoration: underline;
+    }
+    .multi-column-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .multi-column-list ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.95rem;
+    }
+    .multi-column-list ul li {
+      margin-bottom: 0.5rem;
+    }
+    .bcplus-social-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      padding: 1.5rem 0 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      margin-top: 1.5rem;
+    }
+    .bcplus-social-strip img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      filter: brightness(1.2) drop-shadow(0 0 6px #25EE8866);
+      transition: transform 0.3s ease, filter 0.2s ease;
+      border-radius: 50%;
+    }
+    .bcplus-social-strip img:hover {
+      transform: scale(1.1);
+      filter: brightness(1.6) drop-shadow(0 0 12px #25EE88aa);
+    }
+    @media (max-width: 500px) {
+      .bcplus-social-strip img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+    .card.game-card {
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      border: none;
+      box-shadow: 0 0 12px #25EE8844;
+      min-width: 250px;
+      max-width: 300px;
+      height: 200px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      transition: transform 0.3s ease;
+    }
+    .card.game-card:hover {
+      transform: scale(1.05);
+    }
+    .card.game-card .overlay {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75), transparent);
+      color: #fff;
+      padding: 1rem;
+      width: 100%;
+    }
+    .card.game-card .overlay h3 {
+      color: #25EE88;
+      margin-bottom: 0.4rem;
+      font-size: 1.2rem;
+    }
+    .card.game-card .overlay p {
+      font-size: 0.85rem;
+      color: #ddd;
+    }
+    .ticker-bar {
+  width: 100vw;
+  background: #181e25;
+  overflow: hidden;
+  border-bottom: 1.6px solid var(--bc-cyan);
+  box-shadow: 0 2px 12px #25EE8822;
+  padding: 0.5rem 0;
+  position: relative;
+  z-index: 3;
+  height: 2.2em;
+  font-size: 1.02em;
+}
+
+.ticker-track {
+  display: inline-flex;
+  gap: 2.3em;
+  white-space: nowrap;
+  animation: ticker-move 60s linear infinite;
+}
+
+@keyframes ticker-move {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-coin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  color: var(--bc-cyan);
+  font-weight: 600;
+  font-family: 'Orbitron', 'Poppins', Arial, sans-serif;
+}
+
+.ticker-coin.up {
+  color: #00ffae;
+}
+
+.ticker-coin.down {
+  color: #ff6464;
+}
+
+.ticker-icon {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  margin-right: 0.15em;
+  background: #28292c;
+  border: 1.2px solid var(--bc-title);
+}
+
+    .search-row {
+      display: flex;
+      gap: 0.7rem;
+      margin-bottom: 1.2rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-input {
+      width: 300px;
+      max-width: 100vw;
+      padding: 0.75em 1em;
+      border-radius: 11px;
+      border: 1.2px solid #282c38;
+      background: #181822;
+      color: #fafcff;
+      font-size: 1.1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .search-input:focus {
+      border: 1.2px solid var(--bc-title);
+      background: #23243a;
+    }
+    .action-btn {
+      background: linear-gradient(90deg,var(--bc-title),var(--bc-btn),var(--bc-cyan));
+      background-size: 200% 100%;
+      background-position: 0% 50%;
+      color: #16181f;
+      border: none;
+      border-radius: 11px;
+      font-weight: 700;
+      font-size: 1.11rem;
+      padding: 0.85em 1.6em;
+      cursor: pointer;
+      transition: background-position 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.7em;
+    }
+    .action-btn:hover {
+      background-position: 100% 50%;
+      color: var(--bc-title);
+    }
+  </style>
+</head>
+<body>
+  <div id="flash-loader" class="flash-loader">
+    <div class="flash-loader-imgbox">
+      <img class="flash-loader-img" src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/7ecc35e2dbc9c4ac5ebb3ea94c10bbb536104b7f/assets/BCPlus%20logo.gif" alt="Loading BC.Plus...">
+    </div>
+    <div class="flash-loader-spinner"></div>
+    <div class="flash-loader-text"></div>
+  </div>
+   <nav class="header-bar">
+    <a href="/" style="display:inline-block;" "padding: 0;">
+      <img class="header-logo" src="https://github.com/rec-link-io/BC.Plus/raw/46d45e5c0e8c1c44263ec870c7efa1bc1b0cbcb5/assets/AddText_07-13-11.12.34.png" alt="BC.Plus Logo">
+    </a>
+    <!-- ✅ LINK STYLED LIKE A BUTTON" -->
+<a href="#" class="header-play-btn" id="buyCryptoLink" aria-label="Buy TRX via MoonPay"><i class="fa-solid fa-cart-shopping"></i></a>
+
+<!-- ✅ MODAL (Hidden Popup) -->
+<div id="buyModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h3><i class="fa-solid fa-credit-card"></i> Buy $TRX</h3>
+    <input type="text" id="walletInput" placeholder="Enter your TRX wallet address" />
+    <input type="number" id="amountInput" placeholder="Amount in USD" />
+    <button onclick="redirectToMoonPay()">Buy $TRX</button>
+    <button onclick="https://bc.game/i-bcgamenigeria-n/">Trade $BC</button>
+  </div>
+</div>
+<!-- Account Button (NEW) -->
+    <a href="#" class="header-play-btn" id="accountBtn" aria-label="Account">
+  <i class="fa-solid fa-puzzle-piece"></i>
+</a>
+
+<div class="modal-bg" id="accountModalBg">
+  <div class="modal-box">
+    <button class="modal-close" id="accountModalClose">&times;</button>
+    <div id="accountModalContent"></div>
+  </div>
+</div>
+
+    <a href="https://bc.game/i-bcgamenigeria-n/" target="_blank" rel="noopener" class="header-play-btn" aria-label="Play Now on BC.Game"><i class="fa-solid fa-gamepad"></i></a>
+    
+    
+<!-- Trigger Button -->
+<a href="#" class="header-play-btn" id="blogBtn" aria-label="Blog"><i class="fa-solid fa-bullhorn fa-beat"></i></a>
+
+<!-- Modal Structure -->
+<div class="modal-bg" id="blogModalBg">
+  <div class="modal-box" id="blogModalBox">
+    <button class="modal-close" id="blogModalClose">&times;</button>
+    <div id="blogModalContent"></div>
+  </div>
+</div>
+  </nav>
+  <div class="ticker-bar" id="tickerBar">
+    <div class="ticker-track" id="tickerTrack">
+      <!-- Live crypto prices will be injected here -->
+    </div>
+  </div>
+  <div class="container">
+    <div class="scroll-text-container" tabindex="0">
+      <h1>🎮 Welcome to BC.Plus — Powered by BC.Game</h1>
+      <p>BC.Plus is your gateway to a world of rewards. Play top games, complete wagering challenges, earn weekly bonuses, and win commissions from every player you refer — globally!</p>
+      <h2>💰 Why BC.Plus?</h2>
+      <ul>
+        <li><b>Earn 25% commission</b> on every wager made by users under your link.</li>
+        <li><b>Share 15% cashback</b> automatically to your referrals as a reward.</li>
+        <li><b>Showcase wins live</b> — inspire others with your success stories!</li>
+      </ul>
+      <h2>🚀 Getting Started is Easy</h2>
+      <ul>
+        <li>No crypto knowledge needed — play in Naira and other currencies.</li>
+        <li>Seamless global access. Play, refer, and earn from anywhere.</li>
+        <li>Thousands of games to choose from: Crash, Limbo, Plinko, and more!</li>
+      </ul>
+      <h2>🌐 Global Affiliate System</h2>
+      <ul>
+        <li>Invite friends and community. Grow your network and income passively.</li>
+        <li>Weekly leaderboards, bonus drops, and special events for top affiliates.</li>
+        <li>Transparent, instant payouts — your earnings, always available.</li>
+      </ul>
+      <h2>🔒 Safe, Fun & Fair</h2>
+      <ul>
+        <li>BC.Game’s trusted platform: Provably fair, secure, and legal.</li>
+        <li>24/7 live support. Real humans — no bots.</li>
+        <li>Your privacy and funds are protected, always.</li>
+      </ul>
+      <h2>Ready to Play, Refer, and Earn?</h2>
+      <p>Join BC.Plus today and turn your passion for gaming into daily rewards. Welcome to the most rewarding community in global gaming.</p>
+    </div>
+    <button class="start-now" onclick="window.open('https://bc.game/i-bcgamenigeria-n/', '_blank')" aria-label="Play Now on BC.Game"><i class="fa-solid fa-gamepad"></i> Play Now</button>
+  </div>
+  <div class="bcplus-image-fade-section" id="bcplus-image-fade-section">
+    <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/AddText_07-13-12.37.48.png" alt="BC.Plus Promo 4" class="active">
+    <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/BC%2B%20BANNER%201.png" alt="BC.Plus Banner 1">
+    <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/BC%2B%20BANNER%202.png" alt="BC.Plus Banner 2">
+    <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/BC%2B%20banner.png" alt="BC.Plus Banner Main">
+  </div>
+  <div class="carousel touch-carousel" id="games-carousel">
+    <div class="carousel-track">
+      <div class="card game-card" style="background-image: url('https://raw.githubusercontent.com/rec-link-io/BC.Plus/bc64e4201396149d53105343b503bd971dea54ef/assets/images%20(86).jpeg');">
+        <div class="overlay">
+          <h3>Sports Games</h3>
+          <p>Wager on live matches and virtual sports with dynamic odds.</p>
+        </div>
+      </div>
+      <div class="card game-card" style="background-image: url('https://raw.githubusercontent.com/rec-link-io/BC.Plus/bc64e4201396149d53105343b503bd971dea54ef/assets/images%20(88).jpeg');">
+        <div class="overlay">
+          <h3>Casino Games</h3>
+          <p>Enjoy Blackjack, Roulette, Slots, and other classic games.</p>
+        </div>
+      </div>
+      <div class="card game-card" style="background-image: url('https://raw.githubusercontent.com/rec-link-io/BC.Plus/bc64e4201396149d53105343b503bd971dea54ef/assets/images%20(89).jpeg');">
+        <div class="overlay">
+          <h3>Lottery Games</h3>
+          <p>Daily draws, lucky numbers, and instant results!</p>
+        </div>
+      </div>
+      <div class="card game-card" style="background-image: url('https://raw.githubusercontent.com/rec-link-io/BC.Plus/bc64e4201396149d53105343b503bd971dea54ef/assets/images%20(90).jpeg');">
+        <div class="overlay">
+          <h3>Trade Games</h3>
+          <p>Crash, Limbo, and Plinko — wager on market-like games.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="carousel touch-carousel" id="bigwins-carousel">
+    <div class="carousel-track">
+      <div class="card">
+        <h3>@PlayerX</h3>
+        <p class="win-amount">Won $3,200</p>
+        <p>on Crash 🚀</p>
+      </div>
+      <div class="card">
+        <h3>@Lucky123</h3>
+        <p class="win-amount">Won $950</p>
+        <p>on Limbo 🎯</p>
+      </div>
+      <div class="card">
+        <h3>@SpinMaster</h3>
+        <p class="win-amount">Won $1,700</p>
+        <p>on Plinko 🟢</p>
+      </div>
+      <div class="card">
+        <h3>@SlotKing</h3>
+        <p class="win-amount">Won $5,000</p>
+        <p>on Slots 🎰</p>
+      </div>
+      <div class="card">
+        <h3>@DiceQueen</h3>
+        <p class="win-amount">Won $800</p>
+        <p>on Dice 🎲</p>
+      </div>
+      <div class="card">
+        <h3>@PlayerX</h3>
+        <p class="win-amount">Won $3,200</p>
+        <p>on Crash 🚀</p>
+      </div>
+      <div class="card">
+        <h3>@Lucky123</h3>
+        <p class="win-amount">Won $950</p>
+        <p>on Limbo 🎯</p>
+      </div>
+    </div>
+  </div>
+  <div class="price-carousel touch-carousel" id="price-carousel">
+    <div class="price-carousel-track">
+      <div class="price-card" data-type="monthly">
+        <div class="price-email">Monthly Wager</div>
+        <img src="https://github.com/rec-link-io/BC.Plus/blob/8b0b6ce64141d21085484e9f799af7bcd01f6f9a/assets/monthly%20wager.png?raw=true" alt="BC.Plus Monthly Wager">
+        <div class="play-now-text">Join The Challenge</div>
+      </div>
+      <div class="price-card" data-type="weekly">
+        <div class="price-email">Weekly Wager</div>
+        <img src="https://github.com/rec-link-io/BC.Plus/blob/8b0b6ce64141d21085484e9f799af7bcd01f6f9a/assets/WEEKLY%20wager.png?raw=true" alt="BC.Plus Weekly Wager">
+        <div class="play-now-text">Join The Challenge</div>
+      </div>
+      <div class="price-card" data-type="daily">
+        <div class="price-email">Daily Wager</div>
+        <img src="https://github.com/rec-link-io/BC.Plus/blob/8b0b6ce64141d21085484e9f799af7bcd01f6f9a/assets/daily%20wager.png?raw=true" alt="BC.Plus Daily Wager">
+        <div class="play-now-text">Join The Challenge</div>
+      </div>
+    </div>
+  </div>
+  <!-- Only one modal for everything -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <!-- DASHBOARD SECTION - Place this ABOVE <div class="container"> -->
+  <section id="dashboard-section" style="width:100%;display:flex;justify-content:center;margin-top:2.5rem;"><div id="dashboard-card" style="background:var(--bc-card);border:2px solid var(--bc-title);border-radius:18px;box-shadow:0 4px 24px #25EE8822;max-width:760px;width:97vw;padding:2.1rem 1.3rem 1.4rem 1.3rem;"><i class="fa-solid fa-chart-line fa-flip fa-2x" style="color:#25ee88;"></i><h4>Life Market</h4>
+    <div style="display:flex;gap:1.3rem;justify-content:space-between;flex-wrap:wrap;">
+      
+      <!-- BC Token Card -->
+      <div id="bc-coin-card" style="flex:1 1 220px;min-width:220px;max-width:340px;background:rgba(0,255,231,0.05);border-radius:13px;box-shadow:0 2px 14px #25EE8812;padding:1.1rem 1rem;cursor:pointer;display:flex;align-items:center;gap:1.1em;">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/3f4fc7d85473cd7c1f2ef72b79495c1e3dba31ce/assets/bc.game.png" alt="BC Token" style="width:48px;height:48px;border-radius:50%;border:2.5px solid var(--bc-title);background:#161822;">
+        <div>
+          <div style="font-weight:700;color:var(--bc-title);font-size:1.09em;">BC Token <span style="font-size:0.92em;color:var(--bc-cyan);">(BC)</span></div>
+          <div id="bc-coin-price" style="font-size:1.13em;font-weight:700;margin-bottom:0.4em;">Loading...</div>
+          <div style="font-size:0.94em;color:#b2fff2;">Native token for BC.Game, used for rewards and platform utility.</div>
+        </div>
+      </div>
+      <!-- TRX Token Card -->
+      <div id="trx-coin-card" style="flex:1 1 220px;min-width:220px;max-width:340px;background:rgba(0,255,231,0.05);border-radius:13px;box-shadow:0 2px 14px #25EE8812;padding:1.1rem 1rem;cursor:pointer;display:flex;align-items:center;gap:1.1em;">
+        <img src="https://assets.coingecko.com/coins/images/1094/small/tron-logo.png?1547035066" alt="TRX" style="width:48px;height:48px;border-radius:50%;border:2.5px solid var(--bc-title);background:#161822;">
+        <div>
+          <div style="font-weight:700;color:var(--bc-title);font-size:1.09em;">Tron <span style="font-size:0.92em;color:var(--bc-cyan);">(TRX)</span></div>
+          <div id="trx-coin-price" style="font-size:1.13em;font-weight:700;margin-bottom:0.4em;">Loading...</div>
+          <div style="font-size:0.94em;color:#b2fff2;">TRX powers the Tron blockchain and is widely used for fast, low-fee transfers.</div>
+        </div>
+      </div>
+    </div>
+    <!-- Search/Dropdown -->
+    <div style="margin-top:1.65rem;">
+      <form id="coin-search-form" style="display:flex;gap:1.2em;align-items:center;flex-wrap:wrap;justify-content:center;background: var(--bc-card);">
+        <select id="coin-select" style="padding:0.7em 1.1em;border-radius:11px;border:1.2px solid #282c38;background: var(--bc-card);color:#fafcff;font-size:1.09rem;min-width:220px;max-width:260px;outline:none;box-shadow: 0 4px 20px var(--bc-cyan-glow);">
+          <option value="">Select popular crypto...</option>
+        </select>
+        <div style="position:relative;">
+          <input id="coin-search-input" type="text" placeholder="Search any coin (e.g. solana, eth)" style="width:220px;max-width:99vw;padding:0.68em 1em;border-radius:11px;border:1.2px solid #282c38;background:#181822;color:#fafcff;font-size:1.09rem;outline:none;">
+          <button type="submit" class="action-btn" style="margin-left:0.7em;"><i class="fa-solid fa-search"></i>Search</button>
+        </div>
+      </form>
+    </div>
+  </div>a
+</section>
+  <div class="community-summary">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;margin-bottom:1rem;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/BTC.webp" alt="BTC" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/BNB.webp" alt="BNB" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/DOGE.webp" alt="DOGE" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/ETH.webp" alt="ETH" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/MATIC.webp" alt="MATIC" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/SOL.webp" alt="SOL" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/TRX.webp" alt="TRX" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/USDC.webp" alt="USDC" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/USDT.webp" alt="USDT" style="height:32px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/XRP.webp" alt="XRP" style="height:32px;width:auto;">
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center;margin-bottom:0.8rem;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/apple_pay-DhGEreIw.webp" alt="Apple Pay" style="height:28px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/google_pay-FVJ2d1pF.webp" alt="Google Pay" style="height:28px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/mastercard-CVVg_XRh.webp" alt="Mastercard" style="height:28px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/pic_pay-fE-XPIEr.webp" alt="PicPay" style="height:28px;width:auto;">
+      <img src="https://github.com/rec-link-io/BC.Plus/raw/ba6e87be038374a02180cb021b0fdcd8ffe9a4b5/assets/visa-CHvdFeKw.webp" alt="Visa" style="height:28px;width:auto;">
+    </div>
+  </div>
+  <div class="disclaimer-box">
+    <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/a223da670cec9c5b5128018b145f49fe059fa850/assets/landing%20page.png" alt="BC.Plus Logo" class="disclaimer-logo">
+    <div class="disclaimer-text">
+      <strong>Disclaimer:</strong> BC.Plus is an independent affiliate platform powered by creativity and community. We are <u>not</u> BC.Game and do not officially represent BC.Game. We simply build experiences around their ecosystem.
+    </div>
+  </div>
+  <section class="info-section">
+    <h2>🧩 Crypto Online Casino</h2>
+    <p>
+      Casinos online have not always been around, but we can safely say that online casinos have been used a lot since they came on the market.
+      And it's not in short demand nor options, and now in 2023, we have thousands to pick from – it's just a matter of what you like and what payment options you want to see at the casino.
+    </p>
+    <p>
+      Players are always looking for something new, which helps make the gaming experience better and more accessible — letting them focus on the real fun: the games.
+    </p>
+  </section>
+  <section class="info-section legal-section">
+    <h2>🛡️ BC.Game Legal & Licensing</h2>
+    <p>
+      The ultimate crypto gaming destination, trusted by millions worldwide. We bring bold entertainment, cutting-edge experiences, and a thriving community together for non-stop thrills. Play, win, and stay untamed.
+    </p>
+    <p>
+      Your use of and access to BC.GAME signifies that you fully understand and agree to be legally bound by the contents of our Terms of Service and Responsible Gaming Policy.
+    </p>
+    <p><strong>Note:</strong> Crypto trading is not gambling by definition, and it is not covered by our gaming license.</p>
+    <p>
+      <strong>Operator:</strong> BC.GAME is operated by Twocent Technology Limited, a limited liability company registered in Belize (#41939), with address: Sea Urchin Street #2, San Pedro, Ambergris Caye, Belize.
+    </p>
+    <p>
+      BC.GAME is licensed by the Government of the Autonomous Island of Anjouan, Union of Comoros (License No. ALSI-202410011-FI1). All operations comply with regulatory standards.
+    </p>
+  </section>
+  <!-- Bottom Navigation -->
+  <nav style="position:fixed;bottom:0;width:100vw;display:flex;justify-content:space-around;align-items:center;background:rgba(25,29,40,0.98);border-top-left-radius:16px;border-top-right-radius:16px;box-shadow:0 -2px 24px 0 rgba(0,0,0,.45);z-index:3000;padding:0.75rem 0 0.65rem 0;gap:0.3em;">
+  <button id="navNews" class="active" style="background:none;border:none;color:#e7e7ff;font-size:1.17rem;font-weight:700;outline:none;cursor:pointer;letter-spacing:0.05em;border-radius:12px;transition:color 0.2s,background 0.2s;padding:0.6rem 1.3rem;display:flex;align-items:center;gap:0.55em;">
+    <i class="fa-solid fa-newspaper"></i>
+  </button>
+  <button id="navDiscover" style="background:none;border:none;color:#e7e7ff;font-size:1.17rem;font-weight:700;outline:none;cursor:pointer;letter-spacing:0.05em;border-radius:12px;transition:color 0.2s,background 0.2s;padding:0.6rem 1.3rem;display:flex;align-items:center;gap:0.55em;">
+    <i class="fa-solid fa-compass"></i>
+  </button>
+  <button id="navChat" style="background:none;border:none;color:#e7e7ff;font-size:1.17rem;font-weight:700;outline:none;cursor:pointer;letter-spacing:0.05em;border-radius:12px;transition:color 0.2s,background 0.2s;padding:0.6rem 1.3rem;display:flex;align-items:center;gap:0.55em;">
+    <i class="fa-solid fa-comment"></i>
+  </button>
+  <button id="navWallet" style="background:none;border:none;color:#e7e7ff;font-size:1.17rem;font-weight:700;outline:none;cursor:pointer;letter-spacing:0.05em;border-radius:12px;transition:color 0.2s,background 0.2s;padding:0.6rem 1.3rem;display:flex;align-items:center;gap:0.55em;">
+    <i class="fa-brands fa-hive"></i>
+  </button>
+  <button id="askAI" style="background:none;border:none;color:#e7e7ff;font-size:1.17rem;font-weight:700;outline:none;cursor:pointer;letter-spacing:0.05em;border-radius:12px;transition:color 0.2s,background 0.2s;padding:0.6rem 1.3rem;display:flex;align-items:center;gap:0.55em;">
+  <i class="fas fa-robot"></i>
+</button>
+</nav>
+<div class="modal-bg" id="modalBg">
+  <div class="modal-content" id="modalContent"></div>
+</div>
+  <div class="footer">
+    <div class="footer-card">
+      <h3>Contact Support</h3>
+      <p>Email: support@bcplus.live</p>
+      <p>WhatsApp: +234 800 000 0000</p>
+    </div>
+    <div class="footer-card">
+      <h3>About BC.Plus</h3>
+      <p>BC.Plus is a global affiliate gaming system powered by BC.Game. Earn while you play — and let others win too.</p>
+    </div>
+    <div class="footer-card">
+      <h3>💬 Community Summary</h3>
+      <ul>
+        <li>Thousands of players worldwide earning daily with BC.Plus.</li>
+        <li>Weekly events, competitions, and instant rewards.</li>
+        <li>Active Telegram and WhatsApp support groups — join the conversation!</li>
+      </ul>
+    </div>
+    <div class="footer-card">
+      <h3>📬 Help Us Improve Your Experience</h3>
+      <p>Get rewarded for your valuable feedback!</p>
+      <p>Email us: <a href="mailto:feedback@bcgame.com">feedback@bcgame.com</a></p>
+      <p>Security email (vulnerabilities only): <a href="mailto:security@bc.game">security@bc.game</a></p>
+    </div>
+    <div class="bcplus-social-strip">
+      <a href="https://github.com/bcgame-project" target="_blank" aria-label="GitHub">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/main/assets/github.png" alt="GitHub" />
+      </a>
+      <a href="https://www.facebook.com/bcgameofficial" target="_blank" aria-label="Facebook">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/main/assets/facebook-app-round-white-icon.png" alt="Facebook" />
+      </a>
+      <a href="https://discord.gg/xqUMQesZQq" target="_blank" aria-label="Discord">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/main/assets/discord-white-icon.png" alt="Discord" />
+      </a>
+      <a href="https://t.me/bcgamewin" target="_blank" aria-label="Telegram">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/main/assets/telegram.png" alt="Telegram" />
+      </a>
+      <a href="https://x.com/bcgame" target="_blank" aria-label="X Twitter">
+        <img src="https://raw.githubusercontent.com/rec-link-io/BC.Plus/main/assets/x-social-media-white-icon.png" alt="X / Twitter" />
+      </a>
+    </div>
+    <p style="width:100%;text-align:center;margin-top:1.5rem;opacity:.7;">© 2025 BC.Plus. All rights reserved.</p>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/tronweb@4.4.0/dist/TronWeb.min.js"></script>
+  <!-- ✅ STYLES -->
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+  }
+  .modal-content {
+    background: var(--bc-card);
+border: 2px solid var(--bc-card-border);
+border-radius: 12px;
+padding: 2rem;
+max-width: 500px;
+width: 100%;
+max-height: 80vh;
+overflow-y: auto;
+position: 100;
+box-shadow: 0 4px 20px var(--bc-cyan-glow);
+}
+  .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+  .modal-content button {
+    width: 100%;
+    background: #28a745;
+    color: white;
+    margin: 8px 0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size:1.17rem;
+    font-weight:700;
+    outline:none;
+    cursor:pointer;
+    border-radius:12px;
+    transition:color 0.2s,background 0.2s;
+  }
+  .close {
+    float: right;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+<script>
+  // --- Account Modal Logic (NO FIREBASE) ---
+  const accountBtn = document.getElementById('accountBtn');
+  const accountModalBg = document.getElementById('accountModalBg');
+  const accountModalClose = document.getElementById('accountModalClose');
+  const accountModalContent = document.getElementById('accountModalContent');
+
+  accountBtn.onclick = (e) => {
+    e.preventDefault();
+    accountModalBg.classList.add('active');
+    renderAccountWalletModal();
+  };
+
+  accountModalClose.onclick = () => accountModalBg.classList.remove('active');
+  accountModalBg.onclick = (e) => {
+    if (e.target === accountModalBg) accountModalBg.classList.remove('active');
+  };
+
+  function renderAccountWalletModal() {
+    accountModalContent.innerHTML = `
+      <h2 style="margin-bottom:0.8em;">Manage Your Wallet</h2>
+      <p style="margin-bottom:1.5em;">Select a platform to manage your crypto wallet:</p>
+
+      <div style="display:flex;flex-direction:column;gap:1em;">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="Trust Wallet" style="width:36px;height:36px;margin-right:1em;">
+            <strong>Trust Wallet</strong>
+          </div>
+          <a href="https://trustwallet.com" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://www.cwallet.com/_nuxt/img/cwallet-logo.44ef3b3.svg" alt="CWallet" style="width:36px;height:36px;margin-right:1em;">
+            <strong>CWallet</strong>
+          </div>
+          <a href="https://cwallet.com" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://cryptologos.cc/logos/metamask-fox-logo.png" alt="MetaMask" style="width:36px;height:36px;margin-right:1em;">
+            <strong>MetaMask</strong>
+          </div>
+          <a href="https://metamask.io" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+      </div>
+    `;
+  }
+</script>
+
+<script>
+  const blogBtn = document.getElementById('blogBtn');
+  const blogModalBg = document.getElementById('blogModalBg');
+  const blogModalClose = document.getElementById('blogModalClose');
+  const blogModalContent = document.getElementById('blogModalContent');
+
+  blogBtn.onclick = (e) => {
+    e.preventDefault();
+    blogModalBg.classList.add('active');
+    renderBlogModal();
+  };
+
+  blogModalClose.onclick = () => {
+    blogModalBg.classList.remove('active');
+    blogModalContent.innerHTML = ''; // clear content
+  };
+
+  blogModalBg.onclick = (e) => {
+    if (e.target === blogModalBg) {
+      blogModalBg.classList.remove('active');
+      blogModalContent.innerHTML = '';
+    }
+  };
+
+  function renderBlogModal() {
+    blogModalContent.innerHTML = `
+      <h2 style="margin-bottom:1em;">Our Official Blog</h2>
+      <div id="loader" style="text-align:center;margin-top:2em;">
+        <div class="spinner" style="width:40px;height:40px;border:4px solid #ccc;border-top:4px solid #25EE88;border-radius:50%;animation:spin 1s linear infinite;margin:auto;"></div>
+        <p style="font-size:0.85em;color:gray;margin-top:1em;">Loading blog...</p>
+      </div>
+      <iframe id="blogIframe" src="https://yourblog.blogspot.com" style="width:100%;height:80vh;border:none;border-radius:8px;display:none;"></iframe>
+      <p style="font-size:0.85em;color:gray;margin-top:1em;">Loaded inside iframe from Blogger</p>
+    `;
+
+    const iframe = document.getElementById('blogIframe');
+    const loader = document.getElementById('loader');
+
+    iframe.onload = () => {
+      loader.style.display = 'none';
+      iframe.style.display = 'block';
+    };
+  }
+</script>
+
+<script>
+  // --- Account Modal Logic (NO FIREBASE) ---
+  const accountBtn = document.getElementById('accountBtn');
+  const accountModalBg = document.getElementById('accountModalBg');
+  const accountModalClose = document.getElementById('accountModalClose');
+  const accountModalContent = document.getElementById('accountModalContent');
+
+  accountBtn.onclick = (e) => {
+    e.preventDefault();
+    accountModalBg.classList.add('active');
+    renderAccountWalletModal();
+  };
+
+  accountModalClose.onclick = () => accountModalBg.classList.remove('active');
+  accountModalBg.onclick = (e) => {
+    if (e.target === accountModalBg) accountModalBg.classList.remove('active');
+  };
+
+  function renderAccountWalletModal() {
+    accountModalContent.innerHTML = `
+      <h2 style="margin-bottom:0.8em;">Manage Your Wallet</h2>
+      <p style="margin-bottom:1.5em;">Select a platform to manage your crypto wallet:</p>
+
+      <div style="display:flex;flex-direction:column;gap:1em;">
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://cryptologos.cc/logos/trust-wallet-token-twt-logo.png" alt="Trust Wallet" style="width:36px;height:36px;margin-right:1em;">
+            <strong>Trust Wallet</strong>
+          </div>
+          <a href="https://trustwallet.com" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://www.cwallet.com/_nuxt/img/cwallet-logo.44ef3b3.svg" alt="CWallet" style="width:36px;height:36px;margin-right:1em;">
+            <strong>CWallet</strong>
+          </div>
+          <a href="https://cwallet.com" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:1em;background:#1d1d1d;border-radius:8px;">
+          <div style="display:flex;align-items:center;">
+            <img src="https://cryptologos.cc/logos/metamask-fox-logo.png" alt="MetaMask" style="width:36px;height:36px;margin-right:1em;">
+            <strong>MetaMask</strong>
+          </div>
+          <a href="https://metamask.io" target="_blank" style="background:#25EE88;color:#000;padding:0.4em 1em;border-radius:6px;text-decoration:none;font-weight:600;">Open</a>
+        </div>
+
+      </div>
+    `;
+  }
+</script>
+<!-- ✅ SCRIPT -->
+<script>
+  document.getElementById("buyCryptoLink").addEventListener("click", function(e) {
+    e.preventDefault();
+    document.getElementById("buyModal").style.display = "block";
+  });
+
+  function closeModal() {
+    document.getElementById("buyModal").style.display = "none";
+  }
+
+  function redirectToMoonPay() {
+    const wallet = document.getElementById("walletInput").value.trim();
+    const amount = document.getElementById("amountInput").value.trim();
+    if (!wallet || !amount) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    const url = `https://buy.moonpay.com?currencyCode=trx&walletAddress=${wallet}&baseCurrencyAmount=${amount}&baseCurrencyCode=usd`;
+    window.open(url, "_blank");
+    closeModal();
+  }
+</script>
+
+  <script>
+const COINS = [
+  { id: "bc-tokem", symbol: "BC", name: "BC.Game Token" }, // change if your BC token is another!
+  { id: "bc-token", symbol: "BC", name: "BC.Game Token" },
+  { id: "tron", symbol: "TRX", name: "Tron" },
+  { id: "bitcoin", symbol: "BTC", name: "Bitcoin" },
+  { id: "ethereum", symbol: "ETH", name: "Ethereum" },
+  { id: "solana", symbol: "SOL", name: "Solana" },
+  { id: "binancecoin", symbol: "BNB", name: "Binance Coin" },
+  { id: "ripple", symbol: "XRP", name: "Ripple" },
+  { id: "dogecoin", symbol: "DOGE", name: "Dogecoin" },
+  { id: "cardano", symbol: "ADA", name: "Cardano" },
+  { id: "toncoin", symbol: "TON", name: "Toncoin" },
+  { id: "litecoin", symbol: "LTC", name: "Litecoin" },
+  { id: "usd-coin", symbol: "USDC", name: "USD Coin" }
+];
+
+// --- Populate dropdown with price ---
+async function populateDropdown() {
+  const ids = COINS.map(c => c.id).join(',');
+  const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}`;
+  const res = await fetch(url);
+  const coins = await res.json();
+  const select = document.getElementById("coin-select");
+  select.innerHTML = `<option value="">Select popular crypto...</option>` + coins.map(coin =>
+    `<option value="${coin.id}">${coin.name} (${coin.symbol.toUpperCase()}) - $${Number(coin.current_price).toLocaleString(undefined,{maximumFractionDigits:8})}</option>`
+  ).join('');
+  // Set BC & TRX price
+  const bc = coins.find(c=>c.id==="bc-token");
+  const trx = coins.find(c=>c.id==="tron");
+  document.getElementById("bc-coin-price").innerHTML = bc ? `$${Number(bc.current_price).toLocaleString(undefined,{maximumFractionDigits:8})}` : "N/A";
+  document.getElementById("trx-coin-price").innerHTML = trx ? `$${Number(trx.current_price).toLocaleString(undefined,{maximumFractionDigits:8})}` : "N/A";
+  // Save for click lookup
+  window._dashboardCoins = {};
+  coins.forEach(c=>window._dashboardCoins[c.id]=c);
+}
+populateDropdown();
+
+// --- Modal logic (reuse your existing modal!) ---
+function showCoinInfoModal(coinId) {
+  // Use CoinGecko API to fetch full info
+  document.getElementById('modalContent').innerHTML = '<div style="text-align:center;padding:2em 0;"><i class="fa-solid fa-spinner fa-spin" style="font-size:2em;color:#25EE88;"></i></div>';
+  document.getElementById('modalBg').classList.add('active');
+  fetch(`https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true`)
+    .then(r=>r.json())
+    .then(coin=>{
+      const price = coin.market_data?.current_price?.usd;
+      const priceChange = coin.market_data?.price_change_percentage_24h;
+      const marketCap = coin.market_data?.market_cap?.usd;
+      const high24 = coin.market_data?.high_24h?.usd;
+      const low24 = coin.market_data?.low_24h?.usd;
+      const volume = coin.market_data?.total_volume?.usd;
+      const rank = coin.market_cap_rank;
+      const ath = coin.market_data?.ath?.usd;
+      const atl = coin.market_data?.atl?.usd;
+      document.getElementById('modalContent').innerHTML = `
+        <div class="coin-header" style="display:flex;align-items:center;gap:1em;margin-bottom:1.1em;">
+          <img src="${coin.image?.large || coin.image?.thumb || ''}" alt="${coin.name}" style="width:49px;height:49px;border-radius:50%;background:#2d2e36;border:2.5px solid var(--bc-title);box-shadow:0 1px 8px #25EE8812;">
+          <span>
+            <div class="coin-title" style="font-size:1.12em;font-weight:700;color:var(--bc-title);">${coin.name}
+              <span class="coin-symbol" style="font-size:0.97em;font-weight:600;color:var(--bc-cyan);margin-left:0.3em;">(${coin.symbol?.toUpperCase() || ''})</span>
+            </div>
+            <div class="chip" style="background:linear-gradient(90deg,#23243a,#181822 90%);border-radius:7px;padding:0.3em 0.7em;font-size:0.96em;color:var(--bc-cyan);font-weight:600;display:inline-block;margin-right:0.35em;margin-bottom:0.2em;">Rank #${rank||'-'}</div>
+          </span>
+        </div>
+        <div class="coin-price" style="font-size:1.3em;font-weight:700;color:var(--bc-title);margin-bottom:0.22em;">
+          $${Number(price).toLocaleString(undefined,{maximumFractionDigits:8})}
+          <span class="${priceChange >= 0 ? 'price-up' : 'price-down'}">
+            ${priceChange >= 0 ? '<i class="fa-solid fa-arrow-trend-up"></i>' : '<i class="fa-solid fa-arrow-trend-down"></i>'}
+            ${typeof priceChange === 'number' ? priceChange.toFixed(2)+'%' : ''}
+          </span>
+        </div>
+        <div style="margin-top:0.7em;font-size:1em;color:#cfd1f7;">
+          <div><strong>Market Cap:</strong> $${marketCap?.toLocaleString()||'-'}&nbsp; &nbsp;<strong>24h Vol:</strong> $${volume?.toLocaleString()||'-'}</div>
+          <div><strong>24h High:</strong> $${high24?.toLocaleString()||'-'} &nbsp;&nbsp;<strong>24h Low:</strong> $${low24?.toLocaleString()||'-'}</div>
+          <div><strong>ATH:</strong> $${ath?.toLocaleString()||'-'} &nbsp;&nbsp;<strong>ATL:</strong> $${atl?.toLocaleString()||'-'}</div>
+        </div>
+        <div style="margin-top:1em;font-size:0.96em;">
+          <a href="https://www.coingecko.com/en/coins/${coinId}" target="_blank" style="color:var(--bc-title);text-decoration:none;font-weight:700;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> View on CoinGecko</a>
+        </div>
+      `;
+    })
+    .catch(()=>{document.getElementById('modalContent').innerHTML='<span style="color:#ff6464"><i class="fa-solid fa-bug"></i> Error loading coin data.</span>';});
+}
+
+// --- Card click events ---
+document.getElementById('bc-coin-card').onclick = ()=>showCoinInfoModal('bc-token');
+document.getElementById('trx-coin-card').onclick = ()=>showCoinInfoModal('tron');
+
+// --- Dropdown select event ---
+document.getElementById('coin-select').onchange = function() {
+  if(this.value) showCoinInfoModal(this.value);
+};
+
+// --- Search form event ---
+document.getElementById('coin-search-form').onsubmit = function(e) {
+  e.preventDefault();
+  const q = document.getElementById('coin-search-input').value.trim();
+  if(!q) return;
+  // Use CoinGecko search endpoint
+  document.getElementById('modalContent').innerHTML = '<div style="text-align:center;padding:2em 0;"><i class="fa-solid fa-spinner fa-spin" style="font-size:2em;color:#25EE88;"></i></div>';
+  document.getElementById('modalBg').classList.add('active');
+  fetch(`https://api.coingecko.com/api/v3/search?query=${encodeURIComponent(q)}`).then(r=>r.json()).then(data=>{
+    if(data.coins && data.coins.length>0) {
+      // Prefer exact symbol match, then name, then first
+      let coin = data.coins.find(c=>c.symbol.toLowerCase()===q.toLowerCase()) || data.coins.find(c=>c.name.toLowerCase()===q.toLowerCase()) || data.coins[0];
+      showCoinInfoModal(coin.id);
+    } else {
+      document.getElementById('modalContent').innerHTML = `<span style="color:#ff6464"><i class="fa-solid fa-circle-xmark"></i> No coin found for "<b>${q}</b>".</span>`;
+    }
+  }).catch(()=>{
+    document.getElementById('modalContent').innerHTML = `<span style="color:#ff6464"><i class="fa-solid fa-bug"></i> API error. Try again.</span>`;
+  });
+};
+</script>
+<script>
+  const tickerTrack = document.getElementById('tickerTrack');
+  const tickerCoins = [
+    "bitcoin", "ethereum", "solana", "binancecoin", "ripple", "dogecoin", "cardano", "toncoin",
+    "polkadot", "avalanche", "chainlink", "tron", "litecoin", "shiba-inu", "uniswap", "stellar",
+    "aptos", "internet-computer", "near", "arbitrum", "pepe"
+  ];
+
+  function formatNum(num, decimals = 2) {
+    if (num == null || num == undefined) return '-';
+    return Number(num).toLocaleString(undefined, { maximumFractionDigits: decimals });
+  }
+
+  async function loadTicker() {
+    try {
+      const ids = tickerCoins.join(',');
+      const url = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${ids}&order=market_cap_desc`;
+      const res = await fetch(url);
+      const coins = await res.json();
+      
+      const tickerHTML = coins.map(coin => `
+        <span class="ticker-coin ${coin.price_change_percentage_24h >= 0 ? 'up' : 'down'}">
+          <img src="${coin.image}" class="ticker-icon" alt="${coin.symbol.toUpperCase()}"/>
+          ${coin.symbol.toUpperCase()}: $${formatNum(coin.current_price, 8)}
+          <span>
+            ${coin.price_change_percentage_24h >= 0
+              ? '<i class="fa-solid fa-arrow-trend-up"></i>'
+              : '<i class="fa-solid fa-arrow-trend-down"></i>'
+            }
+            ${typeof coin.price_change_percentage_24h === 'number'
+              ? coin.price_change_percentage_24h.toFixed(2) + '%'
+              : ''
+            }
+          </span>
+        </span>
+      `).join('');
+
+      // Duplicate for seamless scroll
+      tickerTrack.innerHTML = tickerHTML + tickerHTML;
+
+    } catch (e) {
+      tickerTrack.innerHTML = '<span style="color:#ff6464">Error loading prices</span>';
+    }
+  }
+
+  loadTicker();
+  setInterval(loadTicker, 45000); // refresh every 45s
+</script>
+
+  <script>
+    // --- Loader ---
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.classList.add('overflow-hidden');
+    });
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        const loader = document.getElementById('flash-loader');
+        if(loader) loader.classList.add('hide');
+        document.body.classList.remove('overflow-hidden');
+      }, 1200);
+    });
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- Image fade ---
+    const fadeImages = document.querySelectorAll('#bcplus-image-fade-section img');
+    let fadeIdx = 0;
+    setInterval(() => {
+      fadeImages[fadeIdx].classList.remove('active');
+      fadeIdx = (fadeIdx + 1) % fadeImages.length;
+      fadeImages[fadeIdx].classList.add('active');
+    }, 3000);
+
+    // --- Carousel touch ---
+    function setupTouchCarousel(carouselSelector, cardSelector, autoInterval = 3500) {
+      document.querySelectorAll(carouselSelector).forEach(carousel => {
+        let isDown = false;
+        let startX, scrollLeft;
+        let autoScrollTimer, userInteracting = false;
+        carousel.addEventListener('mousedown', (e) => {
+          isDown = true;
+          startX = e.pageX - carousel.offsetLeft;
+          scrollLeft = carousel.scrollLeft;
+          carousel.classList.add('active');
+          userInteracting = true;
+          clearTimeout(autoScrollTimer);
+        });
+        carousel.addEventListener('mouseleave', () => { isDown = false; carousel.classList.remove('active'); });
+        carousel.addEventListener('mouseup', () => {
+          isDown = false; carousel.classList.remove('active');
+          userInteracting = false;
+          autoScrollTimer = setTimeout(() => autoScroll(), autoInterval);
+        });
+        carousel.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - carousel.offsetLeft;
+          const walk = (x - startX) * 1.2;
+          carousel.scrollLeft = scrollLeft - walk;
+        });
+        carousel.addEventListener('touchstart', (e) => {
+          isDown = true;
+          startX = e.touches[0].pageX - carousel.offsetLeft;
+          scrollLeft = carousel.scrollLeft;
+          userInteracting = true;
+          clearTimeout(autoScrollTimer);
+        }, {passive:true});
+        carousel.addEventListener('touchend', () => {
+          isDown = false; userInteracting = false;
+          autoScrollTimer = setTimeout(() => autoScroll(), autoInterval);
+        });
+        carousel.addEventListener('touchmove', (e) => {
+          if (!isDown) return;
+          const x = e.touches[0].pageX - carousel.offsetLeft;
+          const walk = (x - startX) * 1.2;
+          carousel.scrollLeft = scrollLeft - walk;
+        }, {passive:true});
+        function autoScroll() {
+          if (userInteracting) return;
+          const cards = carousel.querySelectorAll(cardSelector);
+          if (!cards.length) return;
+          const carouselRect = carousel.getBoundingClientRect();
+          let bestIdx = 0, minDelta = Infinity;
+          cards.forEach((card, idx) => {
+            const cardRect = card.getBoundingClientRect();
+            const delta = Math.abs(cardRect.left - carouselRect.left);
+            if (delta < minDelta) { minDelta = delta; bestIdx = idx; }
+          });
+          let nextIdx = bestIdx + 1;
+          if (nextIdx >= cards.length) nextIdx = 0;
+          const nextCard = cards[nextIdx];
+          carousel.scrollTo({left: nextCard.offsetLeft - carousel.offsetLeft, behavior: 'smooth'});
+          autoScrollTimer = setTimeout(autoScroll, autoInterval);
+        }
+        autoScrollTimer = setTimeout(autoScroll, autoInterval);
+      });
+    }
+    setupTouchCarousel('.carousel', '.card');
+    setupTouchCarousel('.price-carousel', '.price-card');
+
+    // --- Modal logic (unified for all popups) ---
+    const modalBg = document.getElementById('modalBg');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+
+    modalClose.onclick = () => modalBg.classList.remove('active');
+    modalBg.onclick = (e) => { if(e.target === modalBg) modalBg.classList.remove('active'); };
+
+    // --- Price card popups (challenge modals) ---
+    const affiliateLink = 'https://bc.game/i-yourusername';
+    const wagerInfo = {
+      monthly: {
+        game: "BC.Game",
+        challenge: "Monthly Wager",
+        target: "$2,000 Wager",
+        reward: "$300 (15%)",
+        label: "Monthly Wager",
+      },
+      weekly: {
+        game: "BC.Game",
+        challenge: "Weekly Wager",
+        target: "$700 Wager",
+        reward: "$105 (15%)",
+        label: "Weekly Wager",
+      },
+      daily: {
+        game: "BC.Game",
+        challenge: "Daily Wager",
+        target: "$300 Wager",
+        reward: "$45 (15%)",
+        label: "Daily Wager",
+      }
+    };
+    document.querySelectorAll('.price-card').forEach(card => {
+      card.addEventListener('click', function(){
+        const type = card.getAttribute('data-type');
+        const info = wagerInfo[type];
+        modalContent.innerHTML = `
+          <h2>${info.label}</h2>
+          <div style="font-size:1.15rem;line-height:1.65;">
+            🎮 <b>Game:</b> ${info.game}<br>
+            🕒 <b>Challenge:</b> ${info.challenge}<br>
+            🎯 <b>Target:</b> ${info.target}<br>
+            💰 <b>Reward:</b> ${info.reward}
+          </div>
+          <div class="modal-btns">
+            <button class="modal-btn" id="playNowBtn">Play Now</button>
+            <button class="modal-btn" id="submitProofBtn">Submit Proof</button>
+          </div>
+          <div id="proofFormWrap"></div>
+        `;
+        modalBg.classList.add('active');
+        document.getElementById('playNowBtn').onclick = () => {
+          window.open(affiliateLink, '_blank');
+        };
+        document.getElementById('submitProofBtn').onclick = () => {
+          showProofForm(type);
+        };
+      });
+    });
+    function showProofForm(type) {
+      const proofFormWrap = document.getElementById('proofFormWrap');
+      proofFormWrap.innerHTML = `
+        <form id="proofForm" class="modal-form" enctype="multipart/form-data">
+          <label for="bcid">Your BC.Game ID</label>
+          <input type="text" id="bcid" name="bcid" placeholder="e.g. bcuser123" required>
+          <label for="proofImg">Upload Proof (screenshot/photo)</label>
+          <input type="file" id="proofImg" name="proofImg" accept="image/*" required>
+          <input type="hidden" name="wagerType" value="${type}">
+          <"button" class="submit-btn" type="submit">Send Proof</button>
+        </form>
+        <div id="modalSuccess" tygomjclass="modal-success" style="display:none;"></div>
+      `;
+      document.getElementById('proofForm').onsubmit = function(e){
+        e.preventDefault();
+        submitProof(type);
+      };
+    }
+    function submitProof(type) {
+      const modalSuccess = document.getElementById('modalSuccess');
+      modalSuccess.style.display = 'block';
+      modalSuccess.textContent = "✅ Proof submitted! We'll review and credit you soon.";
+      setTimeout(() => { modalBg.classList.remove('active'); }, 1700);
+    }
+
+    // --- Bottom Navigation logic (News, Discover, Wallet) ---
+     const navNews = document.getElementById('navNews');
+    const navDiscover = document.getElementById('navDiscover');
+    const navWallet = document.getElementById('navWallet');
+    // News sources
+    const newsSources = [
+      { name: "CoinDesk", icon: "fa-brands fa-readme", url: "https://www.coindesk.com/" },
+      { name: "The Block", icon: "fa-solid fa-newspaper", url: "https://www.theblock.co/" },
+      { name: "Cointelegraph", icon: "fa-solid fa-bolt", url: "https://cointelegraph.com/" },
+      { name: "CryptoSlate", icon: "fa-solid fa-globe", url: "https://cryptoslate.com/" },
+      { name: "Bitcoin Magazine", icon: "fa-brands fa-btc", url: "https://bitcoinmagazine.com/" },
+      { name: "Decrypt", icon: "fa-solid fa-unlock", url: "https://decrypt.co/" },
+      { name: "Crypto Briefing", icon: "fa-solid fa-bullhorn", url: "https://cryptobriefing.com/" },
+      { name: "NewsNow (Crypto)", icon: "fa-solid fa-rss", url: "https://www.newsnow.co.uk/h/Business+&+Finance/Cryptocurrencies" }
+    ];
+    // Discover platforms
+    const cryptoPlatforms = [
+      { name: "Binance", icon: "fa-solid fa-coins", url: "https://www.binance.com/" },
+      { name: "Coinbase", icon: "fa-brands fa-coinbase", url: "https://www.coinbase.com/" },
+      { name: "Uniswap", icon: "fa-brands fa-ethereum", url: "https://app.uniswap.org/" },
+      { name: "Kraken", icon: "fa-solid fa-water", url: "https://www.kraken.com/" },
+      { name: "OKX", icon: "fa-solid fa-arrow-right-arrow-left", url: "https://www.okx.com/" },
+      { name: "DappRadar", icon: "fa-solid fa-chart-line", url: "https://dappradar.com/" },
+      { name: "OpenSea (NFTs)", icon: "fa-solid fa-water", url: "https://opensea.io/" },
+      { name: "CoinGecko", icon: "fa-solid fa-chart-pie", url: "https://www.coingecko.com/" }
+    ];
+    navNews.onclick = function() {
+      navNews.classList.add('active');
+      navDiscover.classList.remove('active');
+      navWallet.classList.remove('active');
+      modalBg.classList.add('active');
+      modalContent.innerHTML = `
+        <div style="font-size:1.22em;font-weight:700;color:#25EE88;margin-bottom:0.9em;"><i class="fa-solid fa-newspaper"></i> Crypto News</div>
+        <ul style="list-style:none;margin:0;padding:0;">
+          ${newsSources.map(src =>
+            `<li style="margin-bottom:0.8em;font-size:1.07em;display:flex;align-items:center;gap:0.55em;">
+              <i class="${src.icon}"></i> <a href="${src.url}" target="_blank" rel="noopener" style="color:#25EE88;font-weight:600;text-decoration:none;">${src.name}</a>
+            </li>`
+          ).join('')}
+        </ul>
+      `;
+    };
+    navDiscover.onclick = function() {
+      navNews.classList.remove('active');
+      navDiscover.classList.add('active');
+      navWallet.classList.remove('active');
+      modalBg.classList.add('active');
+      modalContent.innerHTML = `
+        <div style="font-size:1.22em;font-weight:700;color:#25EE88;margin-bottom:0.9em;"><i class="fa-solid fa-compass"></i> Discover Platforms</div>
+        <ul style="list-style:none;margin:0;padding:0;">
+          ${cryptoPlatforms.map(p =>
+            `<li style="margin-bottom:0.8em;font-size:1.07em;display:flex;align-items:center;gap:0.55em;">
+              <i class="${p.icon}"></i> <a href="${p.url}" target="_blank" rel="noopener" style="color:#25EE88;font-weight:600;text-decoration:none;">${p.name}</a>
+            </li>`
+          ).join('')}
+        </ul>
+      `;
+    };
+    navWallet.onclick = function() {
+      navNews.classList.remove('active');
+      navDiscover.classList.remove('active');
+      navWallet.classList.add('active');
+      modalBg.classList.add('active');
+      modalContent.innerHTML = `
+        <div style="font-size:1.22em;font-weight:700;color:#25EE88;margin-bottom:0.9em;"><i class="fa-solid fa-wallet"></i> Tron Wallet Generator</div>
+        <div style="margin-bottom:1em;color:#b2fff2;">Generate your secure TRX wallet instantly</div>
+        <button class="action-btn" id="generateWalletBtn"><i class="fa-solid fa-bolt"></i>Generate Wallet</button>
+        <div id="walletInfo" style="display:none;margin-top:1.3em;background:rgba(0,0,0,0.23);border-radius:12px;padding:1.1em;">
+          <div><strong>Public Address:</strong><br><span id="publicKey"></span></div>
+          <div style="margin-top:0.7em;"><strong>Private Key:</strong><br><span id="privateKey"></span></div>
+          <div style="margin-top:1.1em;display:flex;gap:1em;">
+            <button class="action-btn" id="downloadKeysBtn"><i class="fa-solid fa-download"></i>Download</button>
+            <button class="action-btn" id="viewmanagewalletBtn"><i class="fa-solid fa-arrow-up-right-from-square"></i>Manage Walle</button>
+            <button class="action-btn" id="viewTronScanBtn"><i class="fa-solid fa-arrow-up-right-from-square"></i>TronScan</button>
+          </div>
+        </div>
+      `;
+      let currentAddress = '';
+      document.getElementById('generateWalletBtn').onclick = async function() {
+        const tronWeb = TronWeb;
+        const account = await tronWeb.createAccount();
+        const address = account.address.base58;
+        const privateKey = account.privateKey;
+        currentAddress = address;
+        document.getElementById('walletInfo').style.display = 'block';
+        document.getElementById('publicKey').innerText = address;
+        document.getElementById('privateKey').innerText = privateKey;
+      };
+      document.getElementById('downloadKeysBtn').onclick = function() {
+        const pub = document.getElementById('publicKey').innerText;
+        const priv = document.getElementById('privateKey').innerText;
+        const blob = new Blob([`TRON Wallet\n\nPublic Address:\n${pub}\n\nPrivate Key:\n${priv}`], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "tron_wallet.txt";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };
+      document.getElementById('viewTronScanBtn').onclick = function() {
+        if (currentAddress) {
+          window.open(`https://tronscan.org/#/address/${currentAddress}`, '_blank');
+        } else {
+          alert("Generate a wallet first!");
+        }
+      };
+       document.getElementById('viewmanagewalletBtn').onclick = function() {
+        if (currentAddress) {
+          window.open(`https://trustwallet.com`, '_blank');
+        } else {
+          alert("Generate a wallet first!");}
+      };
+          
+    };
+const askAI = document.getElementById('askAI');
+
+askAI.onclick = function () {
+  navNews.classList.remove('active');
+  navDiscover.classList.remove('active');
+  navWallet.classList.remove('active');
+  askAI.classList.add('active');
+
+  modalBg.classList.add('active');
+  modalContent.innerHTML = `
+    <div style="font-size:1.22em;font-weight:700;color:#25EE88;margin-bottom:0.9em;">
+      <i class="fas fa-robot"></i> Ask Gemini AI
+    </div>
+    <div id="aiResponse" style="margin-bottom:1em;color:#b2fff2;background:rgba(0,0,0,0.23);padding:1em;border-radius:12px;height:200px;overflow-y:auto;">
+      <em>BC.Game #1 Crypto Casino</em>
+    </div>
+    <input id="aiInput" type="text" placeholder="Ask me anything..." style="width:100%;padding:0.75em;border-radius:8px;border:none;margin-bottom:0.7em;font-size:1em;" />
+    <button id="sendAiBtn" style="width:100%;padding:0.75em;border:none;border-radius:8px;background:#25EE88;color:#000;font-weight:700;font-size:1em;cursor:pointer;">
+      Send
+    </button>
+  `;
+
+  const apiKey = "AIzaSyCXneJRBI2xFu0y3ujYTd6RztGv_h11WJk";
+  const aiResponse = document.getElementById("aiResponse");
+
+  // Store conversation context here
+  let history = [];
+
+  async function askGemini(question) {
+    // Add user message to history
+    history.push({
+      role: "user",
+      parts: [{ text: question }]
+    });
+
+    aiResponse.innerHTML += `<div style="margin-top:10px; color: #fff;"><strong>You:</strong> ${question}</div>`;
+    aiResponse.scrollTop = aiResponse.scrollHeight;
+
+    try {
+      const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-goog-api-key": apiKey
+        },
+        body: JSON.stringify({
+          contents: history
+        })
+      });
+
+      const data = await res.json();
+      const botText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response.";
+
+      // Add AI reply to history
+      history.push({
+        role: "model",
+        parts: [{ text: botText }]
+      });
+
+      aiResponse.innerHTML += `<div style="margin-top:10px;"><strong>Gemini:</strong> ${botText}</div>`;
+      aiResponse.scrollTop = aiResponse.scrollHeight;
+    } catch (err) {
+      aiResponse.innerHTML += `<div style="color:red;">❌ Error: ${err.message}</div>`;
+    }
+  }
+
+  // First auto message
+  
+
+  // Send button
+  document.getElementById("sendAiBtn").onclick = function () {
+    const question = document.getElementById("aiInput").value.trim();
+    if (question) {
+      document.getElementById("aiInput").value = "";
+      askGemini(question);
+    }
+  };
+};
+
+
+  </script>
+  
+
+      <!-- Chat Modal -->
+     <!-- Chat Modal -->
+     <style>
+      body {
+      background: #171f23;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .main-container {
+      max-width: 750px;
+      margin: 24px auto 36px auto;
+      background: #20272b;
+      border-radius: 13px;
+      box-shadow: 0 8px 32px #0004;
+      overflow: hidden;
+    }
+    .header {
+      background: #18314f;
+      padding: 16px 20px 10px 20px;
+      color: #ffa500;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-align: center;
+      border-bottom: 2px solid #ffa500;
+    }
+    .section-title {
+      color: #ffa500;
+      font-size: 1.1rem;
+      margin: 14px 0 7px 0;
+    }
+    .inputs-container {
+      display: none; /* HIDE THE OLD INLINE FORMS */
+    }
+    .input-block {
+      background: #232e35;
+      border-radius: 9px;
+      padding: 15px 15px 11px 15px;
+      box-shadow: 0 2px 8px #0002;
+    }
+    label {
+      font-weight: bold;
+      color: #ffa500;
+      display: block;
+      margin-bottom: 4px;
+    }
+    input[type="text"], input[type="tel"], textarea, select {
+      width: 100%;
+      padding: 9px;
+      margin: 6px 0 14px 0;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background: #222d33;
+      color: #fff;
+      font-size: 1rem;
+      box-sizing: border-box;
+      resize: none;
+    }
+    textarea { min-height: 60px; }
+    .btn {
+      background: orange;
+      color: #1b1b1b;
+      border: none;
+      font-size: 1.09rem;
+      padding: 8px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      width: 100%;
+      transition: background 0.2s;
+      margin-bottom: 8px;
+    }
+    .btn:hover { background: #ffd580; }
+    .status-msg {
+      margin-top: 5px;
+      color: lime;
+      font-size: 1em;
+      min-height: 22px;
+      text-align: center;
+    }
+    .chat-section {
+      background: #182126;
+      padding: 0;
+      
+      margin-top: 18px;
+      min-height: 340px;
+      max-height: 200px;
+      overflow-y: auto;
+      position: relative;
+    }
+    .chat-list {
+      list-style: none;
+      margin: 0;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .chat-message {
+      background: #232e35;
+      border-left: 5px solid #ffa500;
+      border-radius: 7px;
+      padding: 11px 16px 8px 13px;
+      color: #eee;
+      font-size: 1.03em;
+      box-shadow: 0 2px 8px #0003;
+      position: relative;
+      word-break: break-word;
+    }
+    .chat-message.agent { border-left-color: #0ae; }
+    .chat-message.verified { border-left-color: #0ae; }
+    .chat-message.system { border-left-color: #0ff; color: #0ff; background: #1c2232; }
+    .chat-message .sender {
+      font-weight: bold;
+      color: #ffa500;
+      font-size: 0.96em;
+      margin-bottom: 2px;
+      display: block;
+    }
+    .chat-message .timestamp {
+      color: #bbb;
+      font-size: 0.89em;
+      position: absolute;
+      top: 10px;
+      right: 12px;
+    }
+    .chat-message .prop-label {
+      font-weight: bold;
+      color: #80ffd0;
+    }
+    .verified-badge {
+      display: inline-block;
+      background: #0ae;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.95em;
+      font-weight: bold;
+      padding: 1px 7px;
+      margin-left: 7px;
+      letter-spacing: 0.5px;
+      vertical-align: middle;
+    }
+    /* Loading skeleton for chat */
+    .chat-loading {
+      background: #232e35;
+      border-radius: 7px;
+      margin: 10px;
+      min-height: 320px;
+      height: 1000px;
+      box-shadow: 0 2px 8px #0003;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex;
+      overflow: hidden;
+      opacity: 1;
+      transition: opacity 0.3s;
+    }
+    .chat-loading .loading-bar {
+      width: 280px;
+      height: 60px;
+      background: #707072;
+      margin: 0 0 16px 0;
+      border-radius: 7px;
+      animation: loadingBarAnim 1.2s infinite alternate;
+    }
+    .chat-loading .loading-bar:nth-child(1) { width: 260px; animation-delay: .1s; }
+    .chat-loading .loading-bar:nth-child(2) { width: 260px; animation-delay: .2s; }
+    .chat-loading .loading-bar:nth-child(3) { width: 270px; animation-delay: .35s; }
+    .chat-loading .loading-bar:nth-child(4) { width: 250px; animation-delay: .6s; }
+    .chat-loading .loading-bar:nth-child(5) { width: 260px; animation-delay: .2s; }
+    .chat-loading .loading-bar:nth-child(6) { width: 270px; animation-delay: .35s; }
+    .chat-loading .loading-bar:nth-child(7) { width: 250px; animation-delay: .6s; }
+    .chat-loading .loading-bar:nth-child(8) { width: 265px; animation-delay: .25s; }
+    @keyframes loadingBarAnim {
+      from { opacity: .5; }
+      to { opacity: 1; }
+    }
+    /* ====== BOTTOM NAVIGATION BAR ====== */
+    .bottom-nav {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #1c2232;
+      border-top: 2px solid #ffa500;
+      display: flex;
+      justify-content: space-around;
+      z-index: 110;
+      height: 60px;
+      box-shadow: 0 -2px 24px #000c;
+    }
+    .nav-btn {
+      flex: 1;
+      background: none;
+      border: none;
+      color: #ffa500;
+      font-weight: bold;
+      font-size: 1.19rem;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      transition: background 0.16s, color 0.16s;
+      border-radius: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      letter-spacing: 0.5px;
+    }
+    .nav-btn.selected, .nav-btn:focus {
+      background: #ffd580;
+      color: #1b1b1b;
+      outline: none;
+    }
+    .nav-btn:hover {
+      background: #232e35;
+      color: #fff;
+    }
+    .nav-btn .nav-icon {
+      font-size: 1.5em;
+      display: block;
+      margin-bottom: 1px;
+    }
+    /* ======= Modal Popup Styling ======= */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      z-index: 120;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(20,22,30,0.88);
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.18s;
+    }
+    .modal-overlay.active {
+      display: flex;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      background: #232e35;
+      border-radius: 13px;
+      box-shadow: 0 4px 24px #0007;
+      width: 95vw;
+      max-width: 410px;
+      padding: 22px 21px 14px 21px;
+      position: relative;
+      animation: popIn 0.2s;
+    }
+    @keyframes popIn {
+      from { transform: scale(.9);}
+      to { transform: scale(1);}
+    }
+    .modal-close {
+      position: absolute;
+      top: 15px; right: 19px;
+      background: none;
+      border: none;
+      color: #ff5858;
+      font-size: 1.4em;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+      transition: color .18s;
+    }
+    </style>
+    <!-- Font Awesome for Send Button Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    
+    <div class="main-container">
+      <div class="modal" id="chatModal" style="display:none;">
+  <div class="modal-content" style="max-width: 850px; margin: 5% auto; background: #20272b; padding: 20px; border-radius: 12px; box-shadow: 0 0 20px #25EE88;">
+    <span class="close" onclick="document.getElementById('chatModal').style.display='none'" style="float:right; font-size:28px; cursor:pointer;">×</span>
+    
+    
+      <div class="chat-section" style="position:relative;">
+  
+   <ul class="chat-list" id="chatList"></ul>
+</div>
+
+<div class="chat-input-container">
+   <input type="text" id="messageInput" placeholder="Type a message..." />
+  <button type="button" onclick="sendMessage()" style="max-width: 850px; margin: 5% auto; background: #20272b; padding: 20px; border-radius: 12px; box-shadow: 0 0 20px #25EE88;"><i class="fas fa-paper-plane"></i> Send</button>
+</div>
+</div>
+
+<div class="modal-content" style="max-width: 850px; margin: 5% auto; background: #20272b; padding: 20px; border-radius: 12px; box-shadow: 0 0 20px #25EE88;">
+  </div>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDh2RTAaezQ-XpoS7ZdjAQAKkwwelm41Qo",
+        authDomain: "bcplus-248f5.firebaseapp.com",
+        databaseURL: "https://bcplus-248f5-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "bcplus-248f5",
+        storageBucket: "bcplus-248f5.firebasestorage.app",
+        messagingSenderId: "1051933304496",
+        appId: "1:1051933304496:web:318f2ac7c5e3452fdefd75"
+      };
+      // Initialize Firebase
+      try {
+        firebase.initializeApp(firebaseConfig);
+      } catch (error) {
+        console.error('Firebase initialization error:', error);
+      }
+      const db = firebase.database();
+      const messagesRef = db.ref("messages");
+      const auth = firebase.auth();
+
+      // Anonymous Authentication
+      auth.signInAnonymously().catch((error) => {
+        console.error('Anonymous auth error:', error);
+      });
+
+      // Online Presence
+      const onlineCountEl = document.getElementById("onlineCount");
+      const connectedRef = firebase.database().ref(".info/connected");
+      const presenceRef = firebase.database().ref("presence/");
+      let myId = "user_" + Math.floor(Math.random() * 1000000);
+
+      connectedRef.on("value", (snapshot) => {
+        if (snapshot.val() === true) {
+          let userRef = presenceRef.child(myId);
+          userRef.set(true);
+          userRef.onDisconnect().remove();
+        }
+      });
+
+      presenceRef.on("value", (snapshot) => {
+        if (onlineCountEl) {
+          const count = snapshot.numChildren();
+          onlineCountEl.textContent = "Online: " + count;
+        }
+      });
+
+      // Bad Word Filter
+      const badWords = ["fuck", "shit", "bastard", "nigga", "idiot", "fool", "dumb", "asshole", "rape", "kill"];
+      function containsBadWord(message) {
+        const msg = message.toLowerCase();
+        return badWords.some(word => msg.includes(word));
+      }
+
+      // Send Message
+      function sendMessage() {
+        const input = document.getElementById("messageInput");
+        const text = input.value.trim();
+        if (!text) return;
+
+        if (containsBadWord(text)) {
+          alert("Inappropriate language is not allowed.");
+          input.value = "";
+          return;
+        }
+
+        const message = {
+          sender: myId,
+          text,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        };
+        messagesRef.push(message).catch((error) => {
+          console.error('Error sending message:', error);
+        });
+        input.value = "";
+        new Audio("https://notificationsounds.com/storage/sounds/file-sounds-1145-pristine.mp3").play();
+      }
+
+      // Display Messages
+      const chatList = document.getElementById("chatList");
+      messagesRef.on("child_added", (snapshot) => {
+        const msg = snapshot.val();
+        const li = document.createElement("li");
+        li.className = `chat-message ${msg.system ? 'system' : ''}`;
+        li.innerHTML = `<span class="sender">${msg.sender}</span>${msg.text}<span class="timestamp">${msg.timestamp}</span>`;
+        chatList.appendChild(li);
+        requestAnimationFrame(() => {
+          chatList.scrollTop = chatList.scrollHeight; // Auto-scroll
+        });
+        // Hide loading animation after first message
+        const chatLoading = document.getElementById("chatLoading");
+        if (chatLoading) {
+          chatLoading.classList.add("hidden");
+        }
+      }, (error) => {
+        console.error('Error fetching messages:', error);
+      });
+
+      // System Ads Every 30 Minutes
+      setInterval(() => {
+        const systemAd = {
+          sender: "System 🔰 <span class='verified-badge'>Verified</span>",
+          text: "🔥 Earn big at <a href='https://bc.game/i-bcgamenigeria-n/' target='_blank'>BC.Game</a> or get your free wallet at <a href='https://cwallet.com' target='_blank'>CWallet</a>",
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          system: true
+        };
+        messagesRef.push(systemAd).catch((error) => {
+          console.error('Error sending system ad:', error);
+        });
+      }, 1800000); // 30 minutes
+
+      // Modal Toggle
+      const navChat = document.getElementById("navChat");
+      if (navChat) {
+        navChat.onclick = function () {
+          document.getElementById("chatModal").style.display = "block";
+        };
+      }
+      </script>
+   </body>
+</html>
